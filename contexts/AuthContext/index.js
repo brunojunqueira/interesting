@@ -35,6 +35,8 @@ export function AuthProvider({children}){
         const { user, session, error } = await supabase.auth.signIn({
             // provider can be 'github', 'google', 'gitlab', and more
             provider: 'google'
+        }, {
+            redirectTo: process.env.NEXT_PUBLIC_REDIRECT_URL
         });
 
     }

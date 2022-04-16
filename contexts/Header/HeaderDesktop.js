@@ -1,4 +1,5 @@
 import useAuthContext from "../../hooks/useAuthContext";
+import { useRouter } from "next/router";
 
 import { Avatar, Box, Flex, Icon, Image, Input, InputGroup, InputRightElement, Menu, MenuButton, MenuItem, MenuList, Spinner, Text } from "@chakra-ui/react";
 import { MdSearch, MdKeyboardArrowDown } from 'react-icons/md'
@@ -7,6 +8,7 @@ import { MdSearch, MdKeyboardArrowDown } from 'react-icons/md'
 export default function HeaderDesktop({loading}){
 
     const { login, logout, user } = useAuthContext();
+    const router = useRouter();
 
     return(
         <Flex
@@ -24,8 +26,10 @@ export default function HeaderDesktop({loading}){
             <Image 
                 draggable='false' 
                 userSelect='none' 
+                cursor='pointer'
                 h='25px' 
                 src='/logo.svg'
+                onClick={()=> router.push('/')}
             />
 
             <InputGroup 

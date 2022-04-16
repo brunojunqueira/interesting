@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import useAuthContext from "../../hooks/useAuthContext";
 
 import { Avatar, Box, Divider, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Icon, Image, Input, InputGroup, InputRightElement, Spinner, Text, useDisclosure } from "@chakra-ui/react";
 import { MdSearch, MdMenu, MdClose } from 'react-icons/md'
-import Link from "next/link";
 
 
 export default function HeaderMobile({loading}){
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { login, logout, user } = useAuthContext();
+    const router = useRouter();
 
     return(
         <Flex
@@ -43,6 +44,8 @@ export default function HeaderMobile({loading}){
                     userSelect='none' 
                     h='25px' 
                     src='/logo.svg'
+                    onClick={() => router.push('/')}
+                    cursor='pointer'
                 />  
                 <Drawer 
                     placement='left'
