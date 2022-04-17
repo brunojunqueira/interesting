@@ -1,4 +1,4 @@
-import { createContext, useState  } from "react";
+import { createContext } from "react";
 import useSizeContext from "../../hooks/useSizeContext";
 
 import HeaderDesktop from "./HeaderDesktop";
@@ -10,14 +10,12 @@ export function HeaderProvider({children}){
 
     const { isMobile } = useSizeContext();
 
-    const [loading, setLoading] = useState(false);
-
     return(
         <HeaderContext.Provider value={{}}>
             { isMobile ?
-                <HeaderMobile loading={loading}/>
+                <HeaderMobile/>
             :
-                <HeaderDesktop loading={loading}/>
+                <HeaderDesktop/>
             }
             {children}
         </HeaderContext.Provider>

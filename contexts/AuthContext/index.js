@@ -1,16 +1,17 @@
 import { createContext, useState, useEffect} from "react"
 import { supabase } from "../../utils/supabase"
+import { useRouter } from "next/router";
 
 export const AuthContext = createContext({});
 
 export function AuthProvider({children}){
 
+    const router = useRouter();
     const [user, setUser] = useState(null);
-    const [session, setSession] = useState(null);
-    const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+
         setLoading(true);
     
         const session = supabase.auth.session()
@@ -29,24 +30,24 @@ export function AuthProvider({children}){
         return () => {
           listener?.unsubscribe()
         }
+
     })
 
     async function login(){
-        const { user, session, error } = await supabase.auth.signIn({
-            // provider can be 'github', 'google', 'gitlab', and more
+        await supabase.auth.signIn({
             provider: 'google'
         }, {
             redirectTo: process.env.NEXT_PUBLIC_REDIRECT_URL
-        });
-
+        })
     }
+
     async function logout(){
-        const { error } = await supabase.auth.signOut();
-        console.log(error);
+        await supabase.auth.signOut();
+        router.reload(window.location.pathname);
     }
 
     return(
-        <AuthContext.Provider value={{login, logout, user, session, error}}>
+        <AuthContext.Provider value={{login, logout, user}}>
             {children}
         </AuthContext.Provider>
     )

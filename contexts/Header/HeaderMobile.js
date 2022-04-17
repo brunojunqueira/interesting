@@ -6,10 +6,11 @@ import { Avatar, Box, Divider, Drawer, DrawerBody, DrawerContent, DrawerHeader, 
 import { MdSearch, MdMenu, MdClose } from 'react-icons/md'
 
 
-export default function HeaderMobile({loading}){
+export default function HeaderMobile(){
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { login, logout, user } = useAuthContext();
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     return(

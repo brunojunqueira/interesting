@@ -1,13 +1,17 @@
-import useAuthContext from "../../hooks/useAuthContext";
+import { useState } from "react"
 import { useRouter } from "next/router";
+import useAuthContext from "../../hooks/useAuthContext";
 
 import { Avatar, Box, Flex, Icon, Image, Input, InputGroup, InputRightElement, Menu, MenuButton, MenuItem, MenuList, Spinner, Text } from "@chakra-ui/react";
 import { MdSearch, MdKeyboardArrowDown } from 'react-icons/md'
+import { IoLogoGoogle } from 'react-icons/io'
+import Link from "next/link";
 
 
-export default function HeaderDesktop({loading}){
+export default function HeaderDesktop(){
 
     const { login, logout, user } = useAuthContext();
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     return(
@@ -58,14 +62,15 @@ export default function HeaderDesktop({loading}){
             {user ? 
             <Box
                 as={ Flex }
-                color='white'
                 gap='10px'
                 alignItems='center'
+                justifyContent='center'
+                color='#E7E0D6'
             >   
-                <Avatar size='md' src={user.avatar_url}/>
+                <Avatar h='40px' w='40px' src={user.avatar_url}/>
                 <Text>{user.name}</Text>
                 <Menu>
-                    <MenuButton>
+                    <MenuButton ml='-5px' mt='3px' fontSize='15px'>
                         <MdKeyboardArrowDown/>
                     </MenuButton>
                     <MenuList 
@@ -97,7 +102,7 @@ export default function HeaderDesktop({loading}){
                 gap='5px'
             >
                 <Flex
-                    h='50px'
+                    h='40px'
                     w='100px'
                     justify='center'
                     align='center'
@@ -106,7 +111,10 @@ export default function HeaderDesktop({loading}){
                     transition='0.1s ease-in-out'
                     _hover={{background:'rgb(62, 49, 44)'}}
                     onClick={login}
+                    gap='7px'
+                    color='#E7E0D6'
                 >
+                    <IoLogoGoogle/>
                     Sign In
                 </Flex>
             </Box>
