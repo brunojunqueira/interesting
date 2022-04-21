@@ -20,6 +20,7 @@ export default function Header({profile, id}){
                     src={profile?.avatar_url} 
                     borderRadius='50%'
                     h={ isMobile ? '80px' : '100px'}
+                    alt='avatar'
                 />
                 <Flex
                     flexDir='column'

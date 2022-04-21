@@ -35,11 +35,12 @@ export default function Inspiration({profile}){
                             <Image
                                 h='125px'
                                 key={index}
+                                alt='artist avatar'
                             />
                         )
                     })
                     :
-                    <Text>This user haven't a inspiration yet. :( </Text>
+                    <Text>This user haven&apos;t a inspiration yet. :( </Text>
                 }
             </Flex>
         </Flex>

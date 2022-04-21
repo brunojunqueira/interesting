@@ -1,4 +1,4 @@
-import { Flex, Icon, Text } from "@chakra-ui/react";
+import { Flex, Icon, Image, Text } from "@chakra-ui/react";
 import { MdStar } from "react-icons/md"
 
 export default function Favorites({profile}){
@@ -35,11 +35,12 @@ export default function Favorites({profile}){
                             <Image
                                 h='125px'
                                 key={index}
+                                alt='post image'
                             />
                         )
                     })
                     :
-                    <Text>This user haven't a spotlight yet. :( </Text>
+                    <Text>This user haven&apos;t a spotlight yet. :( </Text>
                 }
             </Flex>
         </Flex>

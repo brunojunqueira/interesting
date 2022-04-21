@@ -13,6 +13,7 @@ export default function Logo(){
                 h='25px' 
                 src='/logo.svg'
                 onClick={()=> router.push('/')}
+                alt='logo'
         />
     )
 }

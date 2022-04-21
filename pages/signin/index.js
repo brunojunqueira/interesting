@@ -4,7 +4,7 @@ import useAuthContext from "../../hooks/useAuthContext"
 import { IoLogoGoogle } from 'react-icons/io'
 import { FaFacebookF } from 'react-icons/fa'
 
-export default function signin(){
+export default function Signin(){
 
     const { login } = useAuthContext();
 

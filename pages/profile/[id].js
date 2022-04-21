@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import useAuthContext from "../../hooks/useAuthContext";
 import useSizeContext from "../../hooks/useSizeContext";
 
@@ -11,7 +11,7 @@ import Inspiration from "../../components/Profile/Inspiration";
 
 
 
-export default function profile(){
+export default function Profile(){
 
     const router = useRouter()
 
@@ -19,18 +19,20 @@ export default function profile(){
 
     const { isMobile } = useSizeContext();
 
-    async function setProfile(id){
-        const result = await getProfile(id);
-        if(result !== 'success'){
-            router.push('/404');
-        }
-     } 
 
     useEffect(()=>{        
+
+        async function setProfile(id){
+            const result = await getProfile(id);
+            if(result !== 'success'){
+                router.push('/404');
+            }
+        } 
+
         const id = router.query.id;
         if(id) setProfile(id);
 
-    }, [router.query.id])
+    }, [router.query.id, router, getProfile])
 
     return(
         <Flex
