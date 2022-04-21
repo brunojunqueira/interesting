@@ -1,6 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { AuthProvider } from '../contexts/AuthContext'
-import { HeaderProvider } from '../contexts/Header'
+import { HeaderProvider } from '../contexts/HeaderContext'
 import { SizeProvider } from '../contexts/SizeContext'
 import '../styles/globals.css'
 
