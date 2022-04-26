@@ -10,15 +10,14 @@ export function SearchProvider(){
 
     const { isMobile } = useSizeContext();
 
-    const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
 
     function search(){
-        setLoading(true)
+        
     }
 
     return(
-        <SearchContext.Provider value={{}}>
+        <SearchContext.Provider value={{  }}>
             <InputGroup 
                 background='white' 
                 color='rgb(33, 25, 22)'
@@ -26,6 +25,7 @@ export function SearchProvider(){
                 width={ isMobile ? '90%' : '30%'} 
             >
                 <Input
+                    id='search-box'
                     _focus={{outlineStyle: 'none'}}
                     placeholder='What are you looking for?'
                     _placeholder={{color:'rgb(33, 25, 22)'}}

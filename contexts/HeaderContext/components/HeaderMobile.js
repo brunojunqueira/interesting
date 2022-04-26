@@ -8,8 +8,10 @@ export default function HeaderMobile(){
 
     return(
         <Flex
-            pos='sticky'
+            pos='fixed'
             top='0'
+            background='white'
+            h='150px'
             flexDir='column'
             align='center'
             gap='10px'

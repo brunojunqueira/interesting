@@ -9,8 +9,9 @@ function MyApp({ Component, pageProps }) {
     <ChakraProvider>
       <AuthProvider>
         <SizeProvider>
-          <HeaderProvider/>
-          <Component {...pageProps} />
+          <HeaderProvider>
+            <Component {...pageProps} />
+          </HeaderProvider>
         </SizeProvider>
       </AuthProvider>
     </ChakraProvider>

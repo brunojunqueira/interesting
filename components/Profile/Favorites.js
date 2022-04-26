@@ -40,7 +40,7 @@ export default function Favorites({profile}){
                         )
                     })
                     :
-                    <Text>This user haven&apos;t a spotlight yet. :( </Text>
+                    <Text>This user haven&apos;t a spotlight yet. </Text>
                 }
             </Flex>
         </Flex>

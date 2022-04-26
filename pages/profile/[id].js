@@ -8,6 +8,7 @@ import { Flex } from "@chakra-ui/react";
 import Header from "../../components/Profile/Header";
 import Favorites from "../../components/Profile/Favorites";
 import Inspiration from "../../components/Profile/Inspiration";
+import Posts from "../../components/Profile/Posts";
 
 
 
@@ -30,7 +31,7 @@ export default function Profile(){
         } 
 
         const id = router.query.id;
-        if(id) setProfile(id);
+        if(id) if(!profile) setProfile(id);
 
     }, [router.query.id, router, getProfile])
 
@@ -39,15 +40,16 @@ export default function Profile(){
             w='100%'
             h='calc(100vh - 75px)'
             justify='center'
-            pt={isMobile ? '10px' : '0'}
+            pt={isMobile ? '150px' : '100px'}
             
         >
             <Flex
                 w={isMobile ? '90vw' : '50vw'}
+                h='fit-content'
                 background='#FFFAFA'
                 flexDir='column'
                 align='center'
-                borderRadius={isMobile ? '10px' : '0'}
+                borderRadius='10px'
                 pt='50px'
                 gap='50px'
                 shadow='0px 2px 2px 1px rgba(0,0,0,0.2)'
@@ -55,6 +57,7 @@ export default function Profile(){
                 <Header profile={profile} id={id}/>
                 <Favorites profile={profile}/>
                 <Inspiration profile={profile}/>
+                <Posts profile={profile}/>
             </Flex>
 
         </Flex>

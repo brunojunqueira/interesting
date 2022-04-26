@@ -7,7 +7,7 @@ export default function HeaderDesktop(){
 
     return(
         <Flex
-            pos='sticky'
+            pos='fixed'
             top='0'
             w='100vw'
             h='75px'

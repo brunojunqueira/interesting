@@ -77,8 +77,8 @@ export default function Header({profile, id}){
             </Flex>
             {(profile?.simple_id !== id ) &&
                 <Flex
-                    h='40px'
-                    w={ isMobile ? '150px' : '200px' }
+                    h={ isMobile ? '30px' : '40px' }
+                    w={ isMobile ? '100px' : '200px' }
                     justify='center'
                     align='center'
                     cursor='pointer'

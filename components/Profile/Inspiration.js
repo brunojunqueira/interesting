@@ -40,7 +40,7 @@ export default function Inspiration({profile}){
                         )
                     })
                     :
-                    <Text>This user haven&apos;t a inspiration yet. :( </Text>
+                    <Text>This user haven&apos;t a inspiration yet. </Text>
                 }
             </Flex>
         </Flex>
