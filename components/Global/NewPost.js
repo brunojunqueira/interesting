@@ -3,8 +3,9 @@ import { useState } from "react";
 import useSizeContext from "../../hooks/useSizeContext"
 import useAuthContext from "../../hooks/useAuthContext"
 
-import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Flex, Text, useDisclosure } from "@chakra-ui/react";
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Flex, Text, useDisclosure, useToast } from "@chakra-ui/react";
 import { MdCollections } from "react-icons/md"
+import { getProfile } from "../../utils/requests";
 
 
 export default function NewPost(){
@@ -13,9 +14,11 @@ export default function NewPost(){
 
     const { user, id } = useAuthContext();
 
-    const {isOpen, onOpen, onClose} = useDisclosure();
+    const { onClose } = useDisclosure();
 
     const [error, setError] = useState(null);
+    
+    const toast = useToast();
 
     async function post(){
 
@@ -52,6 +55,7 @@ export default function NewPost(){
                         author: user.user_metadata.name,
                         author_id: user.id,
                         author_avatar: user.user_metadata.avatar_url,
+                        author_simple_id: id,
                         public: true,
                         src_url:`https://tchvevzeixnravgznlpr.supabase.co/storage/v1/object/public/public-posts/${path}`
                     }
@@ -61,6 +65,28 @@ export default function NewPost(){
                         .insert(post);
 
                     if(error) setError(error.message);
+
+                    else{
+                        
+                        let profile = await getProfile(id);
+
+                        let { error, data } = await supabase
+                        .from('profiles')
+                        .update({
+                            post_count: profile.post_count + 1 
+                        }).eq('id', user.id);
+
+                        if(error) setError(error);
+
+                        if(data) toast({
+                            position: 'top',
+                            title: 'Posted!',
+                            description: "We've received your new post. Reload the page to see it.",
+                            status: 'success',
+                            duration: 3000,
+                            isClosable: true,
+                        })
+                    }
 
                 }
             }
@@ -96,7 +122,11 @@ export default function NewPost(){
                 <MdCollections fontSize='20px'/>
                 New Post
             </Flex>
-            <AlertDialog isOpen={error ?? false} onClose={onClose}>
+            <AlertDialog 
+                isOpen={error ?? false} 
+                onClose={onClose}
+                isCentered
+            >
                 <AlertDialogOverlay/>
                 <AlertDialogContent>
                     <AlertDialogCloseButton 

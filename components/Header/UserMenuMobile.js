@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { useDisclosure } from "@chakra-ui/react";
-import useAuthContext from "../../../hooks/useAuthContext";
+import useAuthContext from "../../hooks/useAuthContext";
 
 import { Avatar, Box, Divider, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import { MdMenu, MdClose } from 'react-icons/md'
@@ -40,7 +40,8 @@ export default function UserMenuMobile(){
                         alignItems='center'
                         justifyContent='space-between'
                     >
-                        <Image 
+                        <Image
+                            alt='logo' 
                             draggable='false' 
                             userSelect='none' 
                             h='25px' 

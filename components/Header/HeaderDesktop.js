@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
-import Logo from "../../../components/Logo"
+import Logo from "../Logo"
+import SearchBar from "./SearchBar";
 import UserMenuDesktop from "./UserMenuDesktop";
-import { SearchProvider } from "../../SearchContext";
 
 export default function HeaderDesktop(){
 
@@ -21,7 +21,7 @@ export default function HeaderDesktop(){
             zIndex='5'
         >
             <Logo/>
-            <SearchProvider/>
+            <SearchBar/>
             <UserMenuDesktop/>
         </Flex>
     )

@@ -1,6 +1,8 @@
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { useState } from "react";
+
+import { Flex, Image, Skeleton, SkeletonCircle, Text } from "@chakra-ui/react";
 import useSizeContext from "../../hooks/useSizeContext";
-import { convert } from "../../utils/conversor";
+import { valueToSimpleValue } from "../../utils/conversor";
 
 export default function Header({profile, id}){
 
@@ -16,66 +18,89 @@ export default function Header({profile, id}){
                 justify='left'
                 gap='20px'
             >
-                <Image
-                    src={profile?.avatar_url} 
-                    borderRadius='50%'
-                    h={ isMobile ? '80px' : '100px'}
-                    alt='avatar'
-                />
+                {profile?.avatar_url ? 
+                    <Image
+                        src={profile?.avatar_url} 
+                        borderRadius='50%'
+                        h={ isMobile ? '80px' : '100px'}
+                        alt='avatar'
+                    />
+                    :
+                    <SkeletonCircle
+                        h={ isMobile ? '80px' : '100px'}
+                        w={ isMobile ? '80px' : '100px'}
+                    />
+                }
                 <Flex
                     flexDir='column'
-                >
-                    <Text
-                        fontSize={isMobile ? '20px' : '30px'}
-                    >
-                        {profile?.name}
-                    </Text>
-                    <Flex
-                        align='center'
-                        gap={isMobile ? '15px' : '25px'}
-                    >
-                        <Flex
-                            flexDir='column'
-                            fontWeight='bold'
+                    gap= { profile ? '0' : '5' }
+                >   
+                    {profile?.name ?
+                        <Text
+                            fontSize={isMobile ? '20px' : '30px'}
                         >
-                            <Text 
-                                mb='-4px'
-                                opacity='0.8'
-                                fontSize={isMobile ? '14px' : '16px'}
-                            > 
-                                {convert(profile?.post_count)}
-                            </Text>
-                            <Text
-                                mt='-4px'
-                                opacity='0.5'
-                                fontSize={isMobile ? '12px' : '14px'}
-                            >
-                                Posts
-                            </Text>
-                        </Flex>
+                            {profile?.name}
+                        </Text>
+                     :
+                        <Skeleton
+                            h={ isMobile ? '20px' : '30px' }
+                            w={isMobile ? '150px' : '250px'}
+                        />
+                    }
+                    
+                    { profile ?
                         <Flex
-                            flexDir='column'
-                            fontWeight='bold'
+                            align='center'
+                            gap={ isMobile ? '15px' : '25px' }
                         >
-                            <Text 
-                                mb='-4px'
-                                opacity='0.8'
-                                fontSize={isMobile ? '14px' : '16px'}
-                            > 
-                                {convert(profile?.fans)}
-                            </Text>
-                            <Text
-                                mt='-4px'
-                                opacity='0.5'
-                                fontSize={isMobile ? '12px' : '14px'}
+                            <Flex
+                                flexDir='column'
+                                fontWeight='bold'
                             >
-                                Fans
-                            </Text>
+                                <Text 
+                                    mb='-4px'
+                                    opacity='0.8'
+                                    fontSize={isMobile ? '14px' : '16px'}
+                                > 
+                                    {valueToSimpleValue(profile?.post_count)}
+                                </Text>
+                                <Text
+                                    mt='-4px'
+                                    opacity='0.5'
+                                    fontSize={isMobile ? '12px' : '14px'}
+                                >
+                                    Posts
+                                </Text>
+                            </Flex>
+                            <Flex
+                                flexDir='column'
+                                fontWeight='bold'
+                            >
+                                <Text 
+                                    mb='-4px'
+                                    opacity='0.8'
+                                    fontSize={isMobile ? '14px' : '16px'}
+                                > 
+                                    {valueToSimpleValue(profile?.fans)}
+                                </Text>
+                                <Text
+                                    mt='-4px'
+                                    opacity='0.5'
+                                    fontSize={isMobile ? '12px' : '14px'}
+                                >
+                                    Fans
+                                </Text>
+                            </Flex>
                         </Flex>
-                    </Flex>
+                        :
+                        <Skeleton
+                            h={isMobile ? '16px' : '25px'}
+                            w={isMobile ? '40px' : '80px'}
+                        />
+                    }
                 </Flex>
             </Flex>
-            {(profile?.simple_id !== id ) &&
+            {(profile?.simple_id !== id  && profile) &&
                 <Flex
                     h={ isMobile ? '30px' : '40px' }
                     w={ isMobile ? '100px' : '200px' }

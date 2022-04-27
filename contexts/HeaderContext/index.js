@@ -1,9 +1,8 @@
-import { Flex } from "@chakra-ui/react";
 import { createContext } from "react";
+import HeaderDesktop from "../../components/Header/HeaderDesktop";
+import HeaderMobile from "../../components/Header/HeaderMobile";
 import useSizeContext from "../../hooks/useSizeContext";
 
-import HeaderDesktop from "./components/HeaderDesktop";
-import HeaderMobile from "./components/HeaderMobile";
 
 export const HeaderContext = createContext({});
 

@@ -1,11 +1,14 @@
 import useAuthContext from "../hooks/useAuthContext"
 
-import { Flex } from "@chakra-ui/react";
-import ImagesGrid from "../components/Home/ImagesGrid";
-import NewPost from "../components/Home/NewPost";
+import { Flex, useBreakpointValue } from "@chakra-ui/react";
+import NewPost from "../components/Global/NewPost";
+import PostsGrid from "../components/Global/PostsGrid";
 import useSizeContext from "../hooks/useSizeContext";
 
+
 export default function Home() {
+
+  const size = useBreakpointValue({base: 1, md: 2, lg: 3, xl: 4, "2xl": 5, "3xl": 6});
 
   const { isMobile } = useSizeContext();
   const { user } = useAuthContext();
@@ -22,7 +25,7 @@ export default function Home() {
       {user && 
         <NewPost/>
       }
-      <ImagesGrid/>
+      <PostsGrid size={size}/>
     </Flex>
   )
 }

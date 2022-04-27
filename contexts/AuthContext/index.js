@@ -1,16 +1,12 @@
 import { createContext, useState, useEffect} from "react"
 import { supabase } from "../../utils/supabase"
-import { useRouter } from "next/router";
 
 export const AuthContext = createContext({});
 
 export function AuthProvider({children}){
 
-    const router = useRouter();
-
     const [id, setId] = useState(null)
     const [user, setUser] = useState(null)
-    const [profile, setProfile ] = useState(null)
 
     useEffect(() => {
 
@@ -36,8 +32,7 @@ export function AuthProvider({children}){
                 setId(result[0].simple_id);
             
             else
-                createUserData()
-            
+                createUserData();
         }, 
         (erro) => {
             console.log(erro);             
@@ -45,6 +40,7 @@ export function AuthProvider({children}){
     }, [user]);
     
     async function createUserData() {        
+
         const profile = {
             id: user.id,
             avatar_url: user.user_metadata.avatar_url,
@@ -67,31 +63,11 @@ export function AuthProvider({children}){
         .select()
         .eq('email', user?.email);
         
-        if(data.length >= 1) resolve(data);
+        if(data?.length >= 1) resolve(data);
         else resolve(null)
 
         if(error) reject(error);        
     })
-
-    async function getProfile(id){
-        if(id){
-            let { data, error } = await supabase
-                .from('profiles')
-                .select()
-                .eq('simple_id', id);
-        
-            if (error) {
-                throw error;
-            }
-            if(data.length > 0){
-                setProfile(data[0]);
-                return 'success'
-            }
-            else{
-                return null;
-            }
-        }
-    }
 
     async function login(provider){
         await supabase.auth.signIn({
@@ -106,7 +82,7 @@ export function AuthProvider({children}){
     }
 
     return(
-        <AuthContext.Provider value={{login, logout, getProfile, profile, user, id}}>
+        <AuthContext.Provider value={{login, logout, user, id}}>
             {children}
         </AuthContext.Provider>
     )

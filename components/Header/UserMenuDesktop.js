@@ -1,12 +1,14 @@
-import useAuthContext from "../../../hooks/useAuthContext" 
+import useAuthContext from "../../hooks/useAuthContext";
 import { useRouter } from "next/router"
 
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import { Avatar, Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react";
 
+
 export default function UserMenuDesktop(){
 
     const { logout, user, id } = useAuthContext();
+    
     const userdata = user && user.user_metadata;
     const router = useRouter();
 

@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { getProfile } from "../../utils/requests";
 import useAuthContext from "../../hooks/useAuthContext";
 import useSizeContext from "../../hooks/useSizeContext";
 
@@ -12,28 +13,32 @@ import Posts from "../../components/Profile/Posts";
 
 
 
+
 export default function Profile(){
 
-    const router = useRouter()
+    const router = useRouter();
 
-    const { id, profile, getProfile } = useAuthContext();
+    const [profile, setProfile] = useState(null);
+    const { id } = useAuthContext();
 
     const { isMobile } = useSizeContext();
 
-
     useEffect(()=>{        
 
-        async function setProfile(id){
+        async function findProfile(id){
             const result = await getProfile(id);
-            if(result !== 'success'){
+            if(!result){
                 router.push('/404');
+            }
+            else{
+                setProfile(result);
             }
         } 
 
         const id = router.query.id;
-        if(id) if(!profile) setProfile(id);
+        if(id) findProfile(id);
 
-    }, [router.query.id, router, getProfile])
+    }, [router.query.id, router])
 
     return(
         <Flex
@@ -57,7 +62,7 @@ export default function Profile(){
                 <Header profile={profile} id={id}/>
                 <Favorites profile={profile}/>
                 <Inspiration profile={profile}/>
-                <Posts profile={profile}/>
+                <Posts id={profile?.simple_id}/>
             </Flex>
 
         </Flex>

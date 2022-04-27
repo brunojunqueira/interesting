@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
-import { SearchProvider } from "../../SearchContext";
+import Logo from "../Logo";
+import SearchBar from "./SearchBar";
 import UserMenuMobile from "./UserMenuMobile";
-import Logo from "../../../components/Logo";
 
 
 export default function HeaderMobile(){
@@ -27,7 +27,7 @@ export default function HeaderMobile(){
                 <UserMenuMobile/>
                 <Logo/>
             </Flex>
-            <SearchProvider/>
+            <SearchBar/>
         </Flex>
     )
 }
