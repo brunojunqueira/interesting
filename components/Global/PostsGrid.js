@@ -23,7 +23,10 @@ export default function PostsGrid({size, user = null}){
         */
         async function getPosts(){
             const result = user ? await getPostsFromUser(user) : await getPostsInRange(range, range+100);
-            if(result) getColumns(result);
+            if(result) {
+                if(size > 1) getColumns(result);
+                else setColumns([result]);
+            }
         }
 
         /**

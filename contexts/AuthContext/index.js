@@ -27,7 +27,7 @@ export function AuthProvider({children}){
     }, [])
 
     useEffect(()=>{
-        if(user) check.then( (result)=> { 
+        if(user) check.then((result) => { 
             if(result)
                 setId(result[0].simple_id);
             
@@ -39,14 +39,15 @@ export function AuthProvider({children}){
         })
     }, [user]);
     
-    async function createUserData() {        
+    async function createUserData() {      
+
+        console.log(user);
 
         const profile = {
             id: user.id,
             avatar_url: user.user_metadata.avatar_url,
             name: user.user_metadata.name,
-            email: user.email,
-            posts: null
+            email: user.email
         }
 
         let { data } = await supabase
